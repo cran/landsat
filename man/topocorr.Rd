@@ -7,7 +7,7 @@
 	Implements several different methods for topographic correction of remote sensing data.
 }
 \usage{
-topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA)
+topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA, GRASS.aspect=FALSE)
 }
 \arguments{
   \item{x}{
@@ -30,6 +30,9 @@ topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA
 }
   \item{na.value}{
 	Value to use for missing data.
+}
+  \item{GRASS.aspect}{
+	Whether aspect is measured according to GRASS defaults (counterclockwise from east) or is measured clockwise from north. If GRASS.aspect=TRUE, aspect is converted to clockwise from north before analysis.
 }
 }
 \details{

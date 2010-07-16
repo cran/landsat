@@ -1,8 +1,18 @@
 topocorr <-
-function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA)
+function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GRASS.aspect=FALSE)
 {
 # topographic correction for image x based on
 # topography and sun location
+
+## aspect may be GRASS output: counterclockwise from east
+## or nonGRASS output: clockwise from north
+## require the latter for further calculations
+## because sunazimuth is always measured clockwise from north
+    if(GRASS.aspect) {
+        aspect <- as.matrix(aspect)
+        aspect <- -1 * aspect + 90
+        aspect <- (aspect + 360) %% 360
+    }
 
 # all inputs are in degrees, but we need radians
     slope <- (pi/180) * as.matrix(slope)
