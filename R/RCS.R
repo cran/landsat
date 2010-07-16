@@ -1,5 +1,5 @@
 RCS <-
-function(data.tc, level=.99) {
+function(data.tc, level=.01) {
 # radiometric control sets, HSNG199
 # takes output of tasscap
 #    list(Brightness=Brightness, Greenness=Greenness, Wetness=Wetness)
@@ -15,7 +15,7 @@ function(data.tc, level=.99) {
     green.level <- quantile(greenness, level, na.rm=TRUE)
     
     rcsmask <- ifelse(brightness < bright.llevel & greenness < green.level, 1, 0)
-    rcsmask <- ifelse(brightness > bright.llevel & greenness < green.level, 1, rcsmask)
+    rcsmask <- ifelse(brightness > bright.ulevel & greenness < green.level, 1, rcsmask)
 
     # return the same structure as the input values
     if(class(rcsgrid) == "SpatialGridDataFrame") 

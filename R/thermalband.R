@@ -5,7 +5,7 @@ function(x, band)
 
 	# coefs: gain, bias, K1, K2 from Chander et al. 2009
 	if(band == 6) band.coefs <- c(0.055376, 1.18, 607.76, 1260.56)
-	if(band == 61) band.coefs <- c(0.066496, -0.42, 666.09, 1282.71)
+	if(band == 61) band.coefs <- c(0.067087, -0.07, 666.09, 1282.71)
 	if(band == 62) band.coefs <- c(0.037205, 3.16, 666.09, 1282.7)
 
 	results <- x

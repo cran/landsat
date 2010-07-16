@@ -7,7 +7,7 @@
 	The Radiometric Control Sets method of relative radiometric correction for Landsat data.
 }
 \usage{
-RCS(data.tc, level = 0.99)
+RCS(data.tc, level = 0.01)
 }
 \arguments{
   \item{data.tc}{
@@ -19,6 +19,7 @@ RCS(data.tc, level = 0.99)
 }
 \details{
 	Radiometric Control Sets (RCSs) are areas such as artificial structures and large bodies of water that can reasonably be expected to have a constant reflectance over time, rather than varying seasonally as vegetation does. Differences in RCS reflectance between dates can be assumed to be due to varying atmospheric conditions.
+	Pixels with low greenness and either high or low brightness are identified.
 
 }
 \value{
@@ -32,7 +33,7 @@ RCS(data.tc, level = 0.99)
 }
 
 \seealso{
-\code{\link{PIF}}, \code{\link{tasscap}}
+	\code{\link{PIF}}, \code{\link{tasscap}}
 }
 \examples{
 
@@ -46,7 +47,7 @@ RCS(data.tc, level = 0.99)
 	july.tc <- tasscap("july", 7)
 	july.rcs <- RCS(july.tc)
 
-	# use RCS to related nov to july Landsat data for band 3
+	# use RCS to relate nov to july Landsat data for band 3
 	# properly, would also remove cloudy areas first
 	data(nov3)
 	# use major axis regression: error in both x and y

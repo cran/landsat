@@ -20,10 +20,10 @@ radiocorr(x, gain, offset, Grescale, Brescale, sunelev, satzenith = 0, edist, Es
 	Band-specific sensor offset. Require either gain and offset or Grescale and Brescale to convert DN to radiance.
 }
   \item{Grescale}{
-	Band-specific sensor $G_{rescale}$ (gain). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
+	Band-specific sensor Grescale (gain). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
 }
   \item{Brescale}{
-	Band-specific sensor $B_{rescale}$ (bias). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
+	Band-specific sensor Brescale (bias). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
 }
   \item{sunelev}{
 	Sun elevation in degrees
@@ -74,7 +74,7 @@ Song, C.; Woodcock, C. E.; Seto, K. C.; Lenney, M. P. & Macomber, S. A. 2001. Cl
 	SHV <- min(as.numeric(names(SHV)[SHV > 1000]))
 	# this is used as Lhaze in the radiocorr function
 
-	# G_rescale, B_rescale, sun elevation comes from metadata for the SHV band
+	# Grescale, Brescale, sun elevation comes from metadata for the SHV band
 	july.DOS <- DOS(sat=7, SHV=SHV, SHV.band=1, Grescale=0.77569, Brescale=-6.20000, sunelev=61.4, edist=ESdist("2002-07-20"))$DNfinal.mean
 
 	# DOS() returns results for the complete set of scattering coefficients
