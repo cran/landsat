@@ -7,7 +7,7 @@
 	Implements several different methods for topographic correction of remote sensing data.
 }
 \usage{
-topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA, GRASS.aspect=FALSE)
+topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA, GRASS.aspect=FALSE, IL.epsilon=0.000001)
 }
 \arguments{
   \item{x}{
@@ -33,6 +33,9 @@ topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA
 }
   \item{GRASS.aspect}{
 	Whether aspect is measured according to GRASS defaults (counterclockwise from east) or is measured clockwise from north. If GRASS.aspect=TRUE, aspect is converted to clockwise from north before analysis.
+}
+  \item{IL.epsilon}{
+	If IL == 0 (Illumination), some methods will give a topographically-corrected value of Inf due to division by zero. If desired, adding a small increment to zero values eliminates this.
 }
 }
 \details{

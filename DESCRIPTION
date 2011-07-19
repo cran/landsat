@@ -1,8 +1,8 @@
 Package: landsat
 Type: Package
 Title: Radiometric and topographic correction of satellite imagery
-Version: 1.0.3
-Date: 2010-07-16
+Version: 1.0.4
+Date: 2011-07-19
 Author: Sarah Goslee
 Maintainer: Sarah Goslee <sarah.goslee@ars.usda.gov>
 Depends: R (>= 2.10.0), rgdal, lmodel2
@@ -11,6 +11,6 @@ Description: Processing of Landsat or other multispectral satellite
         radiometric correction, and topographic correction options.
 License: GPL (>= 2)
 LazyLoad: yes
-Packaged: 2011-03-17 15:52:48 UTC; sarahg
+Packaged: 2011-07-19 17:59:53 UTC; sarahg
 Repository: CRAN
-Date/Publication: 2011-04-30 12:41:40
+Date/Publication: 2011-07-19 23:53:02

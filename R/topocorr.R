@@ -1,8 +1,11 @@
 topocorr <-
-function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GRASS.aspect=FALSE)
+function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GRASS.aspect=FALSE, IL.epsilon=0.000001)
 {
 # topographic correction for image x based on
 # topography and sun location
+
+# IL.epsilon: if IL == 0, the corrected value is Inf (division by zero)
+# adding a tiny increment eliminates the Inf
 
 ## aspect may be GRASS output: counterclockwise from east
 ## or nonGRASS output: clockwise from north
@@ -25,6 +28,7 @@ function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GR
     x[x == na.value] <- NA
 
     IL <- cos(slope) * cos(sunzenith) + sin(slope) * sin(sunzenith) * cos(sunazimuth - aspect)
+    IL[IL == 0] <- IL.epsilon
 
         METHODS <- c("cosine", "improvedcosine", "minnaert", "minslope", "ccorrection", "gamma", "SCS")
         method <- pmatch(method, METHODS)
@@ -52,7 +56,14 @@ function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GR
             K <- 1
         }
         else {
-            K <- lm(log(as.vector(x[slope >= targetslope])) ~ log(as.vector(IL[slope >= targetslope])/cos(sunzenith)))
+            # IL can be <=0 under certain conditions
+            # but that makes it impossible to take log10 so remove those elements
+            K <- data.frame(y = as.vector(x[slope >= targetslope]), x = as.vector(IL[slope >= targetslope])/cos(sunzenith))
+            K <- K[!apply(K, 1, function(x)any(is.na(x))),]
+            K <- K[K$x > 0, ]
+            K <- K[K$y > 0, ]
+
+            K <- lm(log10(K$y) ~ log10(K$x))
             K <- coefficients(K)[[2]] # need slope
             if(K > 1) K <- 1
             if(K < 0) K <- 0
@@ -70,7 +81,14 @@ function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GR
             K <- 1
         }
         else {
-            K <- lm(log(as.vector(x[slope >= targetslope])) ~ log(as.vector(IL[slope >= targetslope])/cos(sunzenith)))
+            # IL can be <=0 under certain conditions
+            # but that makes it impossible to take log10 so remove those elements
+            K <- data.frame(y=as.vector(x[slope >= targetslope]), x=as.vector(IL[slope >= targetslope])/cos(sunzenith))
+            K <- K[!apply(K, 1, function(x)any(is.na(x))),]
+            K <- K[K$x > 0, ]
+            K <- K[K$y > 0, ]
+
+            K <- lm(log10(K$y) ~ log10(K$x))
             K <- coefficients(K)[[2]] # need slope
             if(K > 1) K <- 1
             if(K < 0) K <- 0
