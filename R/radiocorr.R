@@ -33,8 +33,6 @@ function(x, gain, offset, Grescale, Brescale, sunelev, satzenith=0, edist, Esun,
     satzenith <- satzenith * pi / 180
     satphi <- cos(satzenith)
 
-    Eo <- Esun/edist^2
-
     # most new references provide gain and bias
     # want gain and offset
     if(missing(offset)) {
@@ -81,6 +79,8 @@ function(x, gain, offset, Grescale, Brescale, sunelev, satzenith=0, edist, Esun,
             ## iteratively adjust Lhaze downward until it works
             ## This is a lazy kludge!!!
 
+            Eo <- Esun/edist^2
+
             Lp <- (Lhaze - offset) / gain - 0.01 * (Eo * suntheta * TAUz + Edown) * TAUv / pi
 
             taustep <- 1 - (4 * pi * Lp) / (Eo * suntheta)
@@ -109,7 +109,7 @@ function(x, gain, offset, Grescale, Brescale, sunelev, satzenith=0, edist, Esun,
 
 
     ## Applying the models
-    ## REF <-  (pi * (Lsat - Lhaze)) / (TAUv * (Eo * cos(TZ) * TAUz + Edown))
+    ## REF <-  (pi * edist^2 * (Lsat - Lhaze)) / (TAUv * (Esun * cos(sunzenith) * TAUz + Edown))
 
     ## First convert DN to at-sensor radiance
     ## Lhaze output from DOS() is in DN, so this is done as a separate step
@@ -121,7 +121,7 @@ function(x, gain, offset, Grescale, Brescale, sunelev, satzenith=0, edist, Esun,
     ## proceed with radiometric correction
     ## calculate at-surface reflectance
 
-    x <-  (pi * x) / (TAUv * (Eo * cos(TAUz) * TAUz + Edown))
+    x <-  (pi * edist^2 * x) / (TAUv * (Esun * suntheta * TAUz + Edown))
 
     # return the same structure as the input values
     if(class(results) == "SpatialGridDataFrame")

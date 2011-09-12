@@ -30,7 +30,7 @@ function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GR
     IL <- cos(slope) * cos(sunzenith) + sin(slope) * sin(sunzenith) * cos(sunazimuth - aspect)
     IL[IL == 0] <- IL.epsilon
 
-        METHODS <- c("cosine", "improvedcosine", "minnaert", "minslope", "ccorrection", "gamma", "SCS")
+        METHODS <- c("cosine", "improvedcosine", "minnaert", "minslope", "ccorrection", "gamma", "SCS", "illumination")
         method <- pmatch(method, METHODS)
         if (is.na(method)) 
             stop("invalid method")
@@ -98,7 +98,7 @@ function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GR
     }
     else if(method == 5) {
         ## C correction
-        band.lm <- lm(as.vector(IL) ~ as.vector(x))
+        band.lm <- lm(as.vector(x) ~ as.vector(IL))
         C <- coefficients(band.lm)[[1]]/coefficients(band.lm)[[2]]
 
         xout <- x * (cos(sunzenith) + C) / (IL + C)
@@ -113,9 +113,14 @@ function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GR
         ## SCS method from GZ2009
         xout <- x * (cos(sunzenith) * cos(slope))/IL
     }
+    else if(method == 8) {
+        ## illumination only
+        xout <- IL
+    }
 
     ## if slope is zero, reflectance does not change
-    xout[slope == 0 & !is.na(slope)] <- x[slope == 0 & !is.na(slope)]
+    if(method != 8) 
+        xout[slope == 0 & !is.na(slope)] <- x[slope == 0 & !is.na(slope)]
 
     ## if x was a SpatialGridDataFrame, return an object of the same class
     if(class(x.orig) == "SpatialGridDataFrame") {

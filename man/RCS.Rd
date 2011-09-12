@@ -51,7 +51,7 @@ RCS(data.tc, level = 0.01)
 	# properly, would also remove cloudy areas first
 	data(nov3)
 	# use major axis regression: error in both x and y
-	nov.correction <- lmodel2(july3@data[july.rcs@data[,1] == 1, 1] ~ nov3@data[july.rcs@data[,1] == 1, 1])$regression.results[2, 2:3]
+	nov.correction <- lmodel2:::lmodel2(july3@data[july.rcs@data[,1] == 1, 1] ~ nov3@data[july.rcs@data[,1] == 1, 1])$regression.results[2, 2:3]
 	nov3.corrected <- nov3
 	nov3.corrected@data[,1] <- nov3@data[,1] * nov.correction[2] + nov.correction[1]
 

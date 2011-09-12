@@ -26,7 +26,7 @@ topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA
 	Sun azimuth in degrees.
 }
   \item{method}{
-	Topographic correction method to be used. There are currently seven methods available: "cosine", "improvedcosine", "minnaert", "ccorrection" (first four from Riano et al. 2003), "minslope" (Minnaert with slope correction, also from Riano et al. 2003), "gamma" (from Richter et al. 2009), "SCS" (Gu and Gillespie 1998, Gao and Zhang 2009).
+	Topographic correction method to be used. There are currently eight methods available: "cosine", "improvedcosine", "minnaert", "ccorrection" (first four from Riano et al. 2003), "minslope" (Minnaert with slope correction, also from Riano et al. 2003), "gamma" (from Richter et al. 2009), "SCS" (Gu and Gillespie 1998, Gao and Zhang 2009), "illumination" (uncorrected illumination).
 }
   \item{na.value}{
 	Value to use for missing data.
