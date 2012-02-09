@@ -23,16 +23,17 @@ function(mat, padx, pady, shiftx, shifty, nodata=NA)
         mat.grid@cells.dim[2] <- as.integer(mat.grid@cells.dim[2] + 2*pady)
         mat@grid <- mat.grid
 
-        # not S4 class
-        mat.coords <- mat@coords
-        mat.coords[1, 1] <- mat.coords[1, 1] - (padx * mat.grid@cellsize[1])
-        mat.coords[2, 1] <- mat.coords[2, 1] + (padx * mat.grid@cellsize[1])
-        mat.coords[1, 2] <- mat.coords[1, 2] - (pady * mat.grid@cellsize[2])
-        mat.coords[2, 2] <- mat.coords[2, 2] + (pady * mat.grid@cellsize[2])
-        mat@coords <- mat.coords
+## obsoleted by sp_0.9-94
+#-#        # not S4 class
+#-#        mat.coords <- coordinates(mat)
+#-#        mat.coords[1, 1] <- mat.coords[1, 1] - (padx * mat.grid@cellsize[1])
+#-#        mat.coords[2, 1] <- mat.coords[2, 1] + (padx * mat.grid@cellsize[1])
+#-#        mat.coords[1, 2] <- mat.coords[1, 2] - (pady * mat.grid@cellsize[2])
+#-#        mat.coords[2, 2] <- mat.coords[2, 2] + (pady * mat.grid@cellsize[2])
+#-#        mat@coords <- mat.coords
          
         # not S4 class
-        mat.bbox <- mat@bbox
+        mat.bbox <- bbox(mat)
         mat.bbox[1, "min"] <- mat.bbox[1, "min"] - (padx * mat.grid@cellsize[1])
         mat.bbox[1, "max"] <- mat.bbox[1, "max"] + (padx * mat.grid@cellsize[1])
         mat.bbox[2, "min"] <- mat.bbox[2, "min"] - (pady * mat.grid@cellsize[2])
