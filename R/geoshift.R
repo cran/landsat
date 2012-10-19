@@ -8,7 +8,7 @@ function(mat, padx, pady, shiftx, shifty, nodata=NA)
     if(is.matrix(mat)) {
         # pad a matrix and slide it over a given amount
         newmat <- matrix(nodata, nrow=(nrow(mat) + 2 * padx), ncol=(ncol(mat) + 2 * pady))
-        newmat[(shiftx + padx + 1):(nrow(mat) + shiftx + padx), (shifty + pady + 1):(nrow(mat) + shifty + pady)] <- mat
+        newmat[(shiftx + padx + 1):(nrow(mat) + shiftx + padx), (shifty + pady + 1):(ncol(mat) + shifty + pady)] <- mat
     }
     if(class(mat) == "SpatialGridDataFrame") {
         mat.data <- as.matrix(mat)

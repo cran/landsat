@@ -31,7 +31,7 @@ geoshift(mat, padx, pady, shiftx, shifty, nodata = NA)
 }
 }
 \details{
-	This function can be used to correct spatially-referenced images that are off by a few pixels in the x or y directions. It does not warp an image, only slide it. Adding padding to the outside edge makes it possible to match several images even if they are not stored with georeferecing information. geoshift() can be used in conjunction with georef() to automatically match up geospatial images. 
+	This function can be used to correct spatially-referenced images that are off by a few pixels in the x or y directions. It does not warp an image, only slide it. Adding padding to the outside edge makes it possible to match several images even if they are not stored with georeferecing information. geoshift() can be used in conjunction with georef() to automatically match up geospatial images. Note: directions are relative to the image as displayed by the image() command, and not the underlying matrix representation.
 }
 \value{
 Returns data in the same format as the function was given: matrix, data frame, or SpatialGridDataFrame.

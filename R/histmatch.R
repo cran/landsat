@@ -20,13 +20,22 @@ function(master, tofix, mask, minval=0, maxval=255, by=1)
 	tofix.cdf <- hist(tofix, breaks=breaks, plot=FALSE) 
 	tofix.cdf <- c(0, cumsum(tofix.cdf$counts/sum(tofix.cdf$counts)))
 
+    # fixed 2012-07-16 to work with continuous data
+    # originally written to work with integer data
 	results.recode <- breaks
     results.values <- rep(NA, length(tofix))
-	for(i in 1:length(breaks)) {
+    # original #	for(i in 1:length(breaks)) {
+    # original #        testvals <- breaks[master.cdf < tofix.cdf[i]]
+    # original #        if(length(testvals) > 0)
+    # original #            results.recode[i] <- max(testvals)
+    # original #        results.values[tofix == breaks[i]] <- results.recode[i]
+    # original #    }
+
+    for (i in 2:length(breaks)) {
         testvals <- breaks[master.cdf < tofix.cdf[i]]
-        if(length(testvals) > 0)
+        if (length(testvals) > 0) 
             results.recode[i] <- max(testvals)
-        results.values[tofix == breaks[i]] <- results.recode[i]
+        results.values[tofix > breaks[i-1] & tofix <= breaks[i]] <- results.recode[i]
     }
 
     results.final[is.na(mask)] <- results.values
