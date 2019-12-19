@@ -7,7 +7,8 @@
 	Implements several different methods for absolute radiometric correction of satellite data.
 }
 \usage{
-radiocorr(x, gain, offset, Grescale, Brescale, sunelev, satzenith = 0, edist, Esun, Lhaze, method = "apparentreflectance")
+radiocorr(x, gain, offset, Grescale, Brescale, sunelev, satzenith = 0, edist,
+	Esun, Lhaze, method = "apparentreflectance")
 }
 \arguments{
   \item{x}{
@@ -75,7 +76,8 @@ Song, C.; Woodcock, C. E.; Seto, K. C.; Lenney, M. P. & Macomber, S. A. 2001. Cl
 	# this is used as Lhaze in the radiocorr function
 
 	# Grescale, Brescale, sun elevation comes from metadata for the SHV band
-	july.DOS <- DOS(sat=7, SHV=SHV, SHV.band=1, Grescale=0.77569, Brescale=-6.20000, sunelev=61.4, edist=ESdist("2002-07-20"))$DNfinal.mean
+	july.DOS <- DOS(sat=7, SHV=SHV, SHV.band=1, Grescale=0.77569, Brescale=-6.20000,
+		sunelev=61.4, edist=ESdist("2002-07-20"))$DNfinal.mean
 
 	# DOS() returns results for the complete set of scattering coefficients
 	# need to choose the appropriate one based on general atmospheric conditions
@@ -88,7 +90,9 @@ Song, C.; Woodcock, C. E.; Seto, K. C.; Lenney, M. P. & Macomber, S. A. 2001. Cl
 	july.DOS <- july.DOS[ , 2]
 
 	# Use DOS value as Lhaze in radiocorr() for DOS correction to reflectance
-	july3.DOSrefl <- radiocorr(july3, Grescale=0.77569, Brescale=-6.20000, sunelev=61.4, edist=ESdist("2002-07-20"), Esun=1533, Lhaze=july.DOS[3], method="DOS")
+	july3.DOSrefl <- radiocorr(july3, Grescale=0.77569, Brescale=-6.20000, 
+		sunelev=61.4, edist=ESdist("2002-07-20"), Esun=1533, 
+		Lhaze=july.DOS[3], method="DOS")
 
 
 }

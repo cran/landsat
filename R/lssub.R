@@ -1,27 +1,23 @@
-lssub <-
-function(filename, outname, centerx, centery, centerepsg, widthx, widthy)
+lssub <- function(filename, outname, centerx, centery, centerepsg, widthx, widthy)
 {
 
 ### subset a landsat image 
 
     ## get information about the landsat image
-    ## assuming that gdalinfo always provides the same format
+    ## requires gdalinfo
     lsinfo <- system(paste("gdalinfo ", filename, sep=""), intern=TRUE)
 
-    lsorigin <- lsinfo[23]
-    lsorigin <- strsplit(lsorigin, " ")[[1]][3]
-    lsorigin <- gsub("\\(", "", lsorigin)
-    lsorigin <- gsub("\\)", "", lsorigin)
+    # image origin
+    lsorigin <- lsinfo[grepl("Origin", lsinfo)]
+    lsorigin <- strsplit(lsorigin, "[()]")[[1]][2]
     lsorigin <- as.numeric(strsplit(lsorigin, ",")[[1]])
 
-    lspixelsize <- lsinfo[24]
-    lspixelsize <- strsplit(lspixelsize, " ")[[1]][4]
-    lspixelsize <- gsub("\\(", "", lspixelsize)
-    lspixelsize <- gsub("\\)", "", lspixelsize)
+    lspixelsize <- lsinfo[grepl("Pixel Size", lsinfo)]
+    lspixelsize <- strsplit(lspixelsize, "[()]")[[1]][2]
     lspixelsize <- as.numeric(strsplit(lspixelsize, ",")[[1]])
     lspixelsize <- abs(lspixelsize)
 
-    lsepsg <- lsinfo[22]
+    lsepsg <- lsinfo[grepl("EPSG.*]]$", lsinfo)]
     lsepsg <- strsplit(lsepsg, '"')[[1]][4]
 
     # reproject target point if necessary
@@ -50,7 +46,7 @@ function(filename, outname, centerx, centery, centerepsg, widthx, widthy)
         centery <- centery - shiftval
     }
 
-    system(paste("gdal_translate -projwin ", centerx - (lspixelsize[1]*widthx), " ", centery + (lspixelsize[2]*widthy), " ", centerx + (lspixelsize[1]*widthx), " ", centery - (lspixelsize[2]*widthy), " ", filename, " ", outname, sep=""), intern=TRUE)
+    system(paste("gdal_translate -projwin ", centerx - (lspixelsize[1]*widthx/2), " ", centery + (lspixelsize[2]*widthy/2), " ", centerx + (lspixelsize[1]*widthx/2), " ", centery - (lspixelsize[2]*widthy/2), " ", filename, " ", outname, sep=""), intern=TRUE)
 
     invisible()
 

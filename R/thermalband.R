@@ -17,7 +17,7 @@ function(x, band)
 	x <- band.coefs[4] / log(band.coefs[3]/x + 1)
 
     # return the same structure as the input values
-    if(class(results) == "SpatialGridDataFrame")
+    if(is(results, "SpatialGridDataFrame"))
         results@data[,1] <- x
     else if(is.data.frame(results))
         results <- data.frame(matrix(x, nrow=nrow(results), ncol=ncol(results)))

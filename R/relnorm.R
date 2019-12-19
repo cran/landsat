@@ -31,7 +31,7 @@ function(master, tofix, mask, method="MA", nperm=1000)
 
 
     # return the same structure as the input values
-    if(class(results) == "SpatialGridDataFrame")
+    if(is(results, "SpatialGridDataFrame"))
         results@data[,1] <- x.transform
     else if(is.data.frame(results))
         results <- data.frame(matrix(x.transform, nrow=nrow(results), ncol=ncol(results)))

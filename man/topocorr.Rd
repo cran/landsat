@@ -7,7 +7,8 @@
 	Implements several different methods for topographic correction of remote sensing data.
 }
 \usage{
-topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA, GRASS.aspect=FALSE, IL.epsilon=0.000001)
+topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA,
+	GRASS.aspect=FALSE, IL.epsilon=0.000001)
 }
 \arguments{
   \item{x}{
@@ -66,7 +67,8 @@ topocorr(x, slope, aspect, sunelev, sunazimuth, method = "cosine", na.value = NA
 
 	# use cosine method of topographic correction
 	data(july3)
-	july3.topo <- topocorr(july3, dem.slopeasp$slope, dem.slopeasp$aspect, sunelev=61.4, sunazimuth=125.8)
+	july3.topo <- topocorr(july3, dem.slopeasp$slope, dem.slopeasp$aspect, 
+		sunelev=61.4, sunazimuth=125.8)
 
 }
 \keyword{ spatial }

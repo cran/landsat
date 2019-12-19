@@ -14,7 +14,7 @@ clouds <- function(band1, band6, level = 0.0014, buffer=5) {
         dims <- band1@grid@cells.dim
         band1 <- band1@data[,1]
     } else {
-        if(class(band1) == "SpatialGridDataFrame") {
+        if(is(band1, "SpatialGridDataFrame")) {
             results <- band1
             dims <- band1@grid@cells.dim
             band1 <- band1@data[,1]
@@ -29,7 +29,7 @@ clouds <- function(band1, band6, level = 0.0014, buffer=5) {
         band6 <- read.asciigrid(band6)
         band6 <- band6@data[,1]
     } else {
-        if(class(band6) == "SpatialGridDataFrame") {
+        if(is(band6, "SpatialGridDataFrame")) {
             band6 <- band6@data[,1]
         } else {
             band6 <- as.vector(as.matrix(band6))
@@ -43,7 +43,7 @@ clouds <- function(band1, band6, level = 0.0014, buffer=5) {
     cloudmask <- ifelse(as.vector(cloudmask) > 0, 1, NA)
 
     # return the same structure as the input values
-    if(class(results) == "SpatialGridDataFrame")
+    if(is(results, "SpatialGridDataFrame"))
         results@data[,1] <- cloudmask
     else if(is.data.frame(results))
         results <- data.frame(matrix(cloudmask, nrow=nrow(results), ncol=ncol(results)))

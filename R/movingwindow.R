@@ -1,5 +1,5 @@
 movingwindow <-
-function(x, kernel)
+function(x, kernel, na.rm=TRUE)
 {
     # apply kernel as a moving window to x
     results <- x
@@ -11,12 +11,12 @@ function(x, kernel)
 
     for(i in (1+mwoffset):(nrow(x)-mwoffset)) {
         for(j in (1+mwoffset):(ncol(x)-mwoffset)) {
-            newmat[i, j] <- sum(kernel * x[(i-mwoffset):(i+mwoffset), (j-mwoffset):(j+mwoffset)])
+            newmat[i, j] <- sum(kernel * x[(i-mwoffset):(i+mwoffset), (j-mwoffset):(j+mwoffset)], na.rm=na.rm)
         }
     }
 
     # return the same structure as the input values
-    if(class(results) == "SpatialGridDataFrame")
+    if(is(results, "SpatialGridDataFrame"))
         results@data[,1] <- as.vector(newmat)
     else if(is.data.frame(results))
         results <- data.frame(matrix(newmat, nrow=nrow(results), ncol=ncol(results)))

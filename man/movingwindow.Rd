@@ -7,7 +7,7 @@
 	Very simple function to apply a kernel to a matrix across a moving window.
 }
 \usage{
-movingwindow(x, kernel)
+movingwindow(x, kernel, na.rm=TRUE)
 }
 
 \arguments{
@@ -16,6 +16,9 @@ movingwindow(x, kernel)
 }
   \item{kernel}{
 	The kernel to be applied to the matrix, for example a Sobel kernel.
+}
+  \item{na.rm}{
+	NA handling option to be passed to sum(). If TRUE, NA will be returned if any value under the kernel is NA or NaN, otherwise NA values will be omitted.
 }
 }
 \details{

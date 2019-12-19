@@ -7,7 +7,7 @@
 	Finds Bare Soil Line (BSL) and maximum vegetation point.
 }
 \usage{
-BSL(band3, band4, method = "quantile", ulimit = 0.99, llimit = 0.005)
+BSL(band3, band4, method = "quantile", ulimit = 0.99, llimit = 0.005, maxval = 255)
 }
 \arguments{
   \item{band3}{
@@ -20,11 +20,15 @@ BSL(band3, band4, method = "quantile", ulimit = 0.99, llimit = 0.005)
 	Either "quantile" or "minimum" -- describes way in which soil line is identified.
 }
   \item{ulimit}{
-	Upper limit for quantile of band ratios (ulimit < 1)
+	Upper limit for quantile of band ratios (ulimit < 1).
 }
   \item{llimit}{
-	Lower limit for quantile of band ratios (llimit > 0)
+	Lower limit for quantile of band ratios (llimit > 0).
 }
+  \item{maxval}{
+	Maximum value for band data; default of 255 for Landsat 5 and 7.
+}
+
 }
 \details{
 Finding the BSL requires identifying the lowest NIR values for each level of red. The quantile method takes the lowest set of points, those with a NIR/red ratio less than the llimit-th quantile. The minimum value method takes the lowest NIR value for each level of red. However they are found, these points with low NIR for their red values are used in a major axis regression to find the Bare Soil Line.

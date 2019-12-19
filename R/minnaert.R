@@ -77,7 +77,7 @@ minnaert <- function(x, slope, aspect, sunelev, sunazimuth, na.value=NA, GRASS.a
     xout[K.all == 0 & !is.na(K.all)] <- as.vector(as.matrix(x))[K.all == 0 & !is.na(K.all)] # don't correct flat areas
 
     ## if x was a SpatialGridDataFrame, return an object of the same class
-    if(class(x.orig) == "SpatialGridDataFrame") {
+    if(is(x.orig, "SpatialGridDataFrame")) {
         x.orig@data[,1] <- as.vector(xout)
         xout <- x.orig
     }

@@ -40,7 +40,7 @@ function(master, tofix, mask, minval=0, maxval=255, by=1)
 
     results.final[is.na(mask)] <- results.values
 
-    if(class(results) == "SpatialGridDataFrame")
+    if(is(results, "SpatialGridDataFrame"))
         results@data[,1] <- results.final
     else if(is.data.frame(results))
         results <- data.frame(matrix(results.final, nrow=nrow(results), ncol=ncol(results)))

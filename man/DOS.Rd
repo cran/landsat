@@ -7,11 +7,13 @@
 	Calculates calibration value for the Dark Object Subtraction (DOS) method of radiometric correction.
 }
 \usage{
-DOS(sat = 5, scattering.coef = c(-4, -2, -1, -0.7, -0.5), SHV, SHV.band, gain, offset, Grescale, Brescale, sunelev, edist, Esun = c(198.3, 179.6, 153.6, 103.1, 22, 8.34), blackadjust = 0.01)
+DOS(sat = 5, scattering.coef = c(-4, -2, -1, -0.7, -0.5), SHV, SHV.band, gain,
+	offset, Grescale, Brescale, sunelev, edist, Esun = c(198.3, 179.6, 153.6, 
+	103.1, 22, 8.34), blackadjust = 0.01)
 }
 \arguments{
   \item{sat}{
-	Landsat satellite platform: 5 for TM; 7 for ETM+.
+	Landsat satellite platform: 5 for TM; 7 for ETM+; 8 for OLI.
 }
   \item{scattering.coef}{
 	Atmospheric scattering coefficient; defaults are from Chavez 1988.
@@ -70,14 +72,17 @@ DOS(sat = 5, scattering.coef = c(-4, -2, -1, -0.7, -0.5), SHV, SHV.band, gain, o
 	data(july1)
 	data(july3)
 
-	# One approach to choosing a Starting Haze Value is to take the lowest DN value
-	# with a frequency greater than some predetermined threshold, in this case 1000 pixels. 
+	# One approach to choosing a Starting Haze Value is to take
+	# the lowest DN value with a frequency greater than some 
+	# predetermined threshold, in this case 1000 pixels. 
 	SHV <- table(july1@data[,1])
 	SHV <- min(as.numeric(names(SHV)[SHV > 1000]))
 	# this is used as Lhaze in the radiocorr function
 
 	# G_rescale, B_rescale, sun elevation comes from metadata for the SHV band
-	july.DOS <- DOS(sat=7, SHV=SHV, SHV.band=1, Grescale=0.77569, Brescale=-6.20000, sunelev=61.4, edist=ESdist("2002-07-20"))$DNfinal.mean
+	july.DOS <- DOS(sat=7, SHV=SHV, SHV.band=1, Grescale=0.77569, 
+		Brescale=-6.20000, sunelev=61.4, 
+		edist=ESdist("2002-07-20"))$DNfinal.mean
 
 	# DOS() returns results for the complete set of scattering coefficients
 	# need to choose the appropriate one based on general atmospheric conditions
@@ -90,7 +95,9 @@ DOS(sat = 5, scattering.coef = c(-4, -2, -1, -0.7, -0.5), SHV, SHV.band, gain, o
 	july.DOS <- july.DOS[ , 2]
 
 	# Use DOS value as Lhaze in radiocorr() for DOS correction to reflectance
-	july3.DOSrefl <- radiocorr(july3, Grescale=0.77569, Brescale=-6.20000, sunelev=61.4, edist=ESdist("2002-07-20"), Esun=1533, Lhaze=july.DOS[3], method="DOS")
+	july3.DOSrefl <- radiocorr(july3, Grescale=0.77569, Brescale=-6.20000, 
+		sunelev=61.4, edist=ESdist("2002-07-20"), Esun=1533, 
+		Lhaze=july.DOS[3], method="DOS")
 
 }
 \keyword{ spatial }

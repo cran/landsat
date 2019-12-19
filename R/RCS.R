@@ -18,7 +18,7 @@ function(data.tc, level=.01) {
     rcsmask <- ifelse(brightness > bright.ulevel & greenness < green.level, 1, rcsmask)
 
     # return the same structure as the input values
-    if(class(rcsgrid) == "SpatialGridDataFrame") 
+    if(is(rcsgrid, "SpatialGridDataFrame"))
         rcsgrid@data[,1] <- rcsmask
     else if(is.data.frame(rcsgrid)) 
         rcsgrid <- data.frame(matrix(rcsmask, nrow=nrow(rcsgrid), ncol=ncol(rcsgrid)))

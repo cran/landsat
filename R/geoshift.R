@@ -10,7 +10,7 @@ function(mat, padx, pady, shiftx, shifty, nodata=NA)
         newmat <- matrix(nodata, nrow=(nrow(mat) + 2 * padx), ncol=(ncol(mat) + 2 * pady))
         newmat[(shiftx + padx + 1):(nrow(mat) + shiftx + padx), (shifty + pady + 1):(ncol(mat) + shifty + pady)] <- mat
     }
-    if(class(mat) == "SpatialGridDataFrame") {
+    if(is(mat, "SpatialGridDataFrame")) {
         mat.data <- as.matrix(mat)
         mat.data <- geoshift(mat.data, padx, pady, shiftx, shifty, nodata=nodata)
         mat@data <- data.frame(as.vector(mat.data))
@@ -42,7 +42,7 @@ function(mat, padx, pady, shiftx, shifty, nodata=NA)
     }
     
     # return the same structure as the input values
-    if(class(results) == "SpatialGridDataFrame")
+    if(is(results, "SpatialGridDataFrame"))
         results <- mat
     else if(is.data.frame(results))
         results <- data.frame(newmat)

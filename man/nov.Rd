@@ -39,9 +39,7 @@ band	Grescale	Brescale \cr
 5	0.12573		-1.00 \cr
 7	0.04373		-0.35 \cr
 }
-\references{
-	The Landsat Data Users Handbook is available from the United States Geological Survey at http://landsathandbook.gsfc.nasa.gov/handbook.html
-}
+
 \examples{
 	data(nov3)
 	image(nov3)

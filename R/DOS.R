@@ -10,9 +10,9 @@ function(sat=5, scattering.coef=c(-4, -2, -1, -.7, -.5), SHV, SHV.band, gain, of
 ### calculates DN to subtract for each band for a range of
 ### scattering.coef: scattering coefficients. Default values:
 ###	-4.0: Very Clear	SHV <= 55
-###	-2.0: Clear		SHV 56-75
-### 	-1.0: Moderate		SHV 76-95
-###	-0.7: Hazy		SHV 96-115
+###	-2.0: Clear		    SHV 56-75
+### -1.0: Moderate		SHV 76-95
+###	-0.7: Hazy		    SHV 96-115
 ###	-0.5: Very Hazy		SHV >115
 ### sat: 5 or 7 for Landsat platform
 ### sunelev: sun elevation in degrees
@@ -27,17 +27,29 @@ function(sat=5, scattering.coef=c(-4, -2, -1, -.7, -.5), SHV, SHV.band, gain, of
 ### returns the mean version of Chavez 1988 and a slightly more
 ### sophisticated approximation over the entire band's wavelengths
 
-    if(sat == 5)
+    if(sat == 5) {
         bands <- data.frame(
             lmin=c(0.45, 0.52, 0.63, 0.76, 1.55, 2.08),
             lmax=c(0.52, 0.60, 0.69, 0.90, 1.75, 2.35))
-    else if(sat == 7)
-        bands <- data.frame(
-            lmin=c(0.45, 0.52, 0.63, 0.77, 1.55, 2.09),
-            lmax=c(0.52, 0.60, 0.69, 0.90, 1.75, 2.35))
-    else stop("Unknown satellite.\n")
+            rownames(bands) <- c("band1", "band2", "band3", "band4", "band5", "band7")
+    } else {
+        if(sat == 7) {
+            bands <- data.frame(
+                lmin=c(0.45, 0.52, 0.63, 0.77, 1.55, 2.09),
+                lmax=c(0.52, 0.60, 0.69, 0.90, 1.75, 2.35))
+                rownames(bands) <- c("band1", "band2", "band3", "band4", "band5", "band7")
+        } else {
+            if(sat == 8) {
+                bands <- data.frame(
+                    lmin=c(0.43, 0.45, 0.53, 0.64, 0.85, 1.57, 2.11),
+                    lmax=c(0.45, 0.51, 0.59, 0.67, 0.88, 1.65, 2.29))
+                    rownames(bands) <- c("band1", "band2", "band3", "band4", "band5", "band6", "band7")
+            } else {
+                stop("Unknown satellite.\n")
+            }
+        }
+    }
 
-    rownames(bands) <- c("band1", "band2", "band3", "band4", "band5", "band7")
 
 
     ### Chavez 1988 Table 1

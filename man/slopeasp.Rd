@@ -4,7 +4,7 @@
 	Calculate slope and aspect from elevation data.
 }
 \description{
-	Uses gridded elevation data to calculate slope and aspect, by default using a 3x3 region.
+	Uses gridded elevation data to calculate slope and aspect, by default using a 3x3 region. The horizontal resolution and vertical resolution must be in the same units.
 }
 \usage{
 slopeasp(x, EWres, NSres, EWkernel, NSkernel, smoothing=1)
@@ -14,10 +14,10 @@ slopeasp(x, EWres, NSres, EWkernel, NSkernel, smoothing=1)
 	gridded elevation data, either as a SpatialGridDataFrame, dataframe, or matrix.
 }
   \item{EWres}{
-	East-West grid resolution. May be omitted if x is a SpatialGridDataFrame.
+	East-West grid resolution. May be omitted if x is a SpatialGridDataFrame and the horizontal units are the same as the vertical units.
 }
   \item{NSres}{
-	North-South grid resolution. May be omitted if x is a SpatialGridDataFrame.
+	North-South grid resolution. May be omitted if x is a SpatialGridDataFrame and the horizontal units are the same as the vertical units.
 }
   \item{EWkernel}{
 	The kernel to use when calculating the East-West component of slope. If missing, a 3x3 kernel will be used.

@@ -124,7 +124,7 @@ function(x, gain, offset, Grescale, Brescale, sunelev, satzenith=0, edist, Esun,
     x <-  (pi * edist^2 * x) / (TAUv * (Esun * suntheta * TAUz + Edown))
 
     # return the same structure as the input values
-    if(class(results) == "SpatialGridDataFrame")
+    if(is(results, "SpatialGridDataFrame"))
         results@data[,1] <- x
     else if(is.data.frame(x))
         results <- data.frame(matrix(x, nrow=nrow(results), ncol=ncol(results)))

@@ -31,7 +31,7 @@ function(band3, band4, band7, level=.99) {
     pifmask <- ifelse(band43 < band43.level & band7 > band7.level & band7 < 255, 1, 0)
     
     # return the same structure as the input values
-    if(class(pifgrid) == "SpatialGridDataFrame")
+    if(is(pifgrid, "SpatialGridDataFrame"))
         pifgrid@data[,1] <- pifmask
     else if(is.data.frame(pifgrid))
         pifgrid <- data.frame(matrix(pifmask, nrow=nrow(pifgrid), ncol=ncol(pifgrid)))

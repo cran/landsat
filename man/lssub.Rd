@@ -45,7 +45,8 @@ lssub(filename, outname, centerx, centery, centerepsg, widthx, widthy)
 	Requires gdalinfo and gdaltransform to be available to the operating system. Only known to work on linux. This function was written to speed processing of multiple files for a specific project, and may be dropped in future releases of the landsat package. On my computer, lssub() is over an order of magnitude faster than reading the image into R, subsetting it, and writing out the result.
 }
 \examples{
-	\dontrun{lssub("/data/gis/testimage.tif", "/data/gis/subimage.tif", centerx = 260485, centery = 4527220, centerepsg = 26918, widthx = 50, widthy = 50)}
+	\dontrun{lssub("/data/gis/testimage.tif", "/data/gis/subimage.tif", centerx = 260485, 
+	centery = 4527220, centerepsg = 26918, widthx = 50, widthy = 50)}
 }
 \keyword{ spatial }
 \keyword{ utilities }

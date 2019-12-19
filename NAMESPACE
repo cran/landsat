@@ -3,5 +3,7 @@ export(georef, lssub, geoshift, movingwindow, ESdist, ddate)
 export(radiocorr, DOS, RCS, PIF, histmatch, relnorm)
 export(BSL, tasscap, clouds, thermalband)
 export(slopeasp, topocorr, minnaert)
+## import for basic functionality
+import(stats, graphics, methods)
 ## dependencies 
-import(lmodel2, mgcv)
+import(lmodel2, mgcv, rgdal, sp)

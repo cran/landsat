@@ -123,7 +123,7 @@ function(x, slope, aspect, sunelev, sunazimuth, method="cosine", na.value=NA, GR
         xout[slope == 0 & !is.na(slope)] <- x[slope == 0 & !is.na(slope)]
 
     ## if x was a SpatialGridDataFrame, return an object of the same class
-    if(class(x.orig) == "SpatialGridDataFrame") {
+    if(is(x.orig, "SpatialGridDataFrame")) {
         x.orig@data[,1] <- as.vector(xout)
         xout <- x.orig
     }
