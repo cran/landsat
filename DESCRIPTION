@@ -1,16 +1,20 @@
 Package: landsat
 Type: Package
 Title: Radiometric and Topographic Correction of Satellite Imagery
-Version: 1.1.0
-Date: 2019-12-18
-Author: Sarah Goslee
+Version: 1.1.2
+Date: 2023-08-01
+Authors@R: c(person("Sarah", "Goslee", role = c("aut", "cre"),
+                     email = "sarah.goslee@usda.gov"))
+Author: Sarah Goslee [aut, cre]
 Maintainer: Sarah Goslee <sarah.goslee@usda.gov>
-Depends: R (>= 2.15.0), rgdal, sp (>= 1.0)
-Imports: lmodel2, mgcv, stats, graphics, methods
-Description: Processing of Landsat or other multispectral satellite imagery. Includes relative normalization, image-based radiometric correction, and topographic correction options.
+Depends: R (>= 3.2.0), sp (>= 2.0)
+Imports: stats, graphics, methods, lmodel2, mgcv
+Suggests: sf
+Description: Processing of Landsat or other multispectral satellite imagery. Includes relative normalization, image-based radiometric correction, and topographic correction options. The original package description was published as Goslee (2011) <doi:10.18637/jss.v043.i04>, and details of the topographic corrections in Goslee (2012) <doi:10.14358/PERS.78.9.973>.
 License: GPL (>= 2)
 LazyLoad: yes
+BugReports: https://github.com/phiala/landsat/issues
 NeedsCompilation: no
-Packaged: 2019-12-18 23:06:44 UTC; sarahg
+Packaged: 2023-08-01 20:18:38 UTC; sarahg
 Repository: CRAN
-Date/Publication: 2019-12-19 13:40:08 UTC
+Date/Publication: 2023-08-24 22:20:06 UTC

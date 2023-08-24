@@ -1,5 +1,5 @@
-ea5cda6bb17cbceac28cb3fd96dec2b7 *DESCRIPTION
-2f59a165391beef57aaca1a9815df0f4 *NAMESPACE
+d9cb4ff9228ada035e1f7d8801d2111a *DESCRIPTION
+beb776f269d5111dc8e06308b056b1f2 *NAMESPACE
 3a7e4e394f50c6b94c743746678ca0d2 *R/BSL.R
 67279bb559a2da57bb65093fd4bfc65e *R/DOS.R
 b40437dc4ba698e4bdc08f8aab97e18c *R/ESdist.R
@@ -19,7 +19,7 @@ c316be866787394e0bbbeb854e4b26ec *R/slopeasp.R
 44687be3e3e43a7a7db0794e79082251 *R/tasscap.R
 4ed3b44c3d5fa36c94aba586c2a54f13 *R/thermalband.R
 a87444871bfd12cbc883451f67eb6ab7 *R/topocorr.R
-817e44adb9e1389d9f970188390ba3d7 *README
+e7c78b7ca00eed3507732f318527ac68 *README.md
 2da7ec78bc6adf66333ada769d97d9fc *data/dem.rda
 93c2587bc57107a0fdabca58047f9277 *data/july1.rda
 8cf8d114a45d1ec11c8c7ba0a29f1481 *data/july2.rda
@@ -37,7 +37,7 @@ f073ff0ba8b8857d71b88be0f9f260b8 *data/nov2.rda
 1801649560645fd48bfdd2c43a32d707 *data/nov61.rda
 e25592cf5c0acb3480b3a98ddc155aba *data/nov62.rda
 eeb760f724186d9267496bc77b5dac17 *data/nov7.rda
-bc17df0a6dace7f606f1cdfd800687e7 *inst/CITATION
+ae7b586be89093c90085c4be8080a89e *inst/CITATION
 7d6d0f00df543e335a89f409367d2137 *man/BSL.Rd
 29bc1585e01a3002413c290193bd9269 *man/DOS.Rd
 88258847c300cbb1f0f2eed5b06eab17 *man/ESdist.Rd
